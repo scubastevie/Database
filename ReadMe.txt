@@ -1,9 +1,7 @@
-﻿Create Table Script
-
-CREATE TABLE Pricing (
+﻿CREATE TABLE Pricing (
     pricing_date varchar(8) NOT NULL,
     price DECIMAL(19,4) NOT NULL,
-    last_update_Date TIMESTAMP,
+    last_update_Date DATETIME,
     PRIMARY KEY (pricing_date)
 );
 
@@ -13,3 +11,10 @@ AS
 GO;  
 
 
+
+
+CREATE PROCEDURE [dbo].[SP_Insert_Price] @pricing_date varchar(8), @price int, @last_update_Date datetime
+AS 
+INSERT INTO dbo.Pricing ([pricing_date], [price], [last_update_Date])
+VALUES (@pricing_date, @price, @last_update_Date)
+GO

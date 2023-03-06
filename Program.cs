@@ -15,12 +15,11 @@ using FuelPriceUpdate;
 class Program
 {
 
-    private static IConfiguration _iconfiguration;
     static async Task Main(string[] args)
     {
         GetAppSettingsFile();
         FuelPrice fuel = new FuelPrice();
-        await fuel.UpdateFuelPrices(ndays: 10);
+        await fuel.UpdateFuelPrices(ndays: 9);
     }
     static void GetAppSettingsFile()
     {

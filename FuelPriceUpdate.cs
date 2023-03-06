@@ -38,21 +38,24 @@ namespace FuelPriceUpdate
                 {
                     var pricingData = JsonConvert.DeserializeObject<Root>(responseBody);
                     var totalDaysCount = pricingData.series.FirstOrDefault().data.Count();
-
-                    for (int x =0; x < totalDaysCount; x++)
+                    int x = 0;
+                    while ( x < totalDaysCount)
                     {
                         var dayData = pricingData.series.FirstOrDefault().data[x];
                         if (Int32.Parse(dayData[0].ToString()) >= lastDate)
                         {
                             var priceToUpdate = new PricingData()
                             {
-                                Date = dayData[0],
+                                PriceDate = dayData[0],
                                 Price = Decimal.Parse(dayData[1]),
                                 LastUpdateDate = DateTime.Now
                             };
                             SaveRecords save = new SaveRecords();
-                            await save.SavePricing(priceToUpdate);
+                            //await save.SavePricing(priceToUpdate);
+                            Console.WriteLine("Wrote record");
+
                         }
+                        x++;
                     }
 
                 }
